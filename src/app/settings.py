@@ -9,6 +9,7 @@ DEBUG = env('DEBUG')
 SECRET_KEY = env('SECRET_KEY')
 
 SITE_ROOT = root()
+SITE_ID = 1
 
 MEDIA_URL = env('MEDIA_URL')
 MEDIA_ROOT = env('MEDIA_ROOT')
@@ -52,8 +53,17 @@ ROOT_URLCONF = 'app.urls'
 WSGI_APPLICATION = 'app.wsgi.application'
 
 INSTALLED_APPS = [
+    'accounts',
+    'frontend',
+
+    'rest_framework',
+    'rest_framework.authtoken',
+
+    'django_filters',
+
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
