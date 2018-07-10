@@ -55,6 +55,8 @@ WSGI_APPLICATION = 'app.wsgi.application'
 INSTALLED_APPS = [
     'accounts',
     'frontend',
+    'questions',
+    'answers',
 
     'rest_framework',
     'rest_framework.authtoken',

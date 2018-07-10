@@ -1,8 +1,8 @@
-from rest_framework.views import APIView
 from django.contrib.auth.decorators import login_required
-from rest_framework import permissions
-from django.views.generic import TemplateView
 from django.utils.decorators import method_decorator
+from django.views.generic import TemplateView
+from rest_framework import permissions
+from rest_framework.views import APIView
 
 
 class LoginRequiredAPIView(APIView):

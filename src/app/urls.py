@@ -1,8 +1,9 @@
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from django.urls import path, re_path, include
-from app.views import LoginRequiredTemplateView
+from django.urls import include, path, re_path
+
 from accounts.api.views import WhoAmIView
+from app.views import LoginRequiredTemplateView
 
 api_v1 = (
     path('whoami/', WhoAmIView.as_view()),
