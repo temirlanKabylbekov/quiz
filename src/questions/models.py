@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Count
 
@@ -44,6 +45,24 @@ class QuestionList(TimestampedModel):
         for question in self.questions.iterator():
             if question.choices.count() > 1:
                 yield question
+
+    def set_answers(self, user, answers):
+        print(answers, 'OLOLO')
+        if self.has_passed_by(user) is True:
+            raise ValidationError('the same user can`t answer on quiz twice')
+
+        accepted_question_ids = sorted([answer['question'] for answer in answers])
+        question_ids = sorted([question.id for question in self.get_questions()])
+        if accepted_question_ids != question_ids:
+            raise ValidationError('passed invalid question_id or not all the answers to the questions sent')
+
+        for answer in answers:
+            if QuestionChoice.objects.filter(question_id=answer['question'], id=answer['choice']).exists() is False:
+                raise ValidationError('passed invalid choice_id')
+
+        Answer.objects.bulk_create([
+            Answer(user=user, question_id=answer['question'], choice_id=answer['choice']) for answer in answers
+        ])
 
 
 class QuestionQueryset(DefaultQueryset):

@@ -5,7 +5,7 @@ class Factory:
 
     @classmethod
     def question_list(cls, num_questions, num_choices):
-        quest_list = mixer.blend('questions.QuestionList')
+        quest_list = mixer.blend('questions.QuestionList', has_published=True)
         [cls.question(num_choices, question_list=quest_list) for _ in range(num_questions)]
         quest_list.refresh_from_db()
         return quest_list
