@@ -65,6 +65,18 @@ class Question(TimestampedModel):
     class Meta:
         order_with_respect_to = 'question_list'
 
+    def get_choices_percentage(self):
+        answers = Answer.objects.filter(question=self).values('choice').annotate(Count('user'))
+        num_question_answers = sum([answer['user__count'] for answer in answers])
+
+        for choice in self.choices.iterator():
+            choice_answers = next((answer['user__count'] for answer in answers if answer['choice'] == choice.id), 0)
+            percent = 0 if num_question_answers == 0 else round(choice_answers / num_question_answers * 100)
+            yield {
+                'choice': choice.id,
+                'percent': percent,
+            }
+
 
 class QuestionChoice(TimestampedModel):
 

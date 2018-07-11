@@ -59,3 +59,19 @@ class QuestionSerializer(serializers.ModelSerializer):
             'text',
             'choices',
         ]
+
+
+class QuestionAnswerStats(serializers.ModelSerializer):
+
+    question_id = serializers.IntegerField(source='id')
+    stats = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = Question
+        fields = [
+            'question_id',
+            'stats',
+        ]
+
+    def get_stats(self, obj):
+        return list(obj.get_choices_percentage())

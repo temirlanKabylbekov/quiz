@@ -24,3 +24,9 @@ class Factory:
             mixer.blend('answers.Answer', question=question, choice=random_choice, user=user)
         question_list.refresh_from_db()
         return question_list
+
+    @classmethod
+    def answered_question_choice(cls, choice, num_answers):
+        mixer.cycle(num_answers).blend('answers.Answer', question=choice.question, choice=choice)
+        choice.refresh_from_db()
+        return choice
