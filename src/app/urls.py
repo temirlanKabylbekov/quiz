@@ -1,12 +1,19 @@
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import include, path, re_path
+from rest_framework import routers
 
 from accounts.api.views import WhoAmIView
 from app.views import LoginRequiredTemplateView
+from questions.api.views import QuestionListViewset
+
+router = routers.SimpleRouter()
+router.register('question_list', QuestionListViewset)
+
 
 api_v1 = (
     path('whoami/', WhoAmIView.as_view()),
+    path('', include(router.urls)),
 )
 
 urlpatterns = [

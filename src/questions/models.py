@@ -35,7 +35,7 @@ class QuestionList(TimestampedModel):
         return self.name
 
     def get_url(self):
-        return f'/quiz/{self.id}'
+        return f'/quiz/{self.id}/'
 
     def has_passed_by(self, user):
         return Answer.objects.filter(user=user, question__in=self.questions.all()).exists()
