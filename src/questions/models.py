@@ -47,7 +47,6 @@ class QuestionList(TimestampedModel):
                 yield question
 
     def set_answers(self, user, answers):
-        print(answers, 'OLOLO')
         if self.has_passed_by(user) is True:
             raise ValidationError('the same user can`t answer on quiz twice')
 

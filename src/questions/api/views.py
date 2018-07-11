@@ -29,7 +29,6 @@ class QuestionListViewset(MultiSerializerMixin, viewsets.ModelViewSet):
     @detail_route(methods=['post'], permission_classes=[IsAuthenticated])
     def set_answers(self, request, pk=None):
         instance = self.get_object()
-        print(request.data, type(request.data['answers']))
         try:
             instance.set_answers(request.user, json.loads(request.data['answers']))
         except DjangoValidationError as e:
