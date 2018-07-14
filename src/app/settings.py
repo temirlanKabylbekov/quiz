@@ -63,6 +63,8 @@ INSTALLED_APPS = [
 
     'django_filters',
 
+    'nested_inline',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.sites',

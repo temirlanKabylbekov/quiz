@@ -1,6 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Count
+from django.utils.translation import ugettext_lazy as _
 
 from answers.models import Answer
 from app.models import DefaultManager, DefaultQueryset, TimestampedModel
@@ -29,11 +30,15 @@ class QuestionList(TimestampedModel):
 
     objects = DefaultManager.from_queryset(QuestionListQueryset)()
 
-    name = models.CharField(max_length=255)
-    has_published = models.BooleanField(default=False)
+    name = models.CharField(_('Question list name'), max_length=255)
+    has_published = models.BooleanField(_('To publsish'), default=False)
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = _('Question list')
+        verbose_name_plural = _('Question lists')
 
     def get_url(self):
         return f'/quiz/{self.id}/'
@@ -75,13 +80,15 @@ class Question(TimestampedModel):
     objects = DefaultManager.from_queryset(QuestionQueryset)()
 
     question_list = models.ForeignKey('questions.QuestionList', on_delete=models.CASCADE, editable=False, related_name='questions', null=True)
-    text = models.CharField(max_length=255)
+    text = models.CharField(_('Question text'), max_length=255)
 
     def __str__(self):
         return f'{self.question_list}: {self.text}'
 
     class Meta:
         order_with_respect_to = 'question_list'
+        verbose_name = _('Question')
+        verbose_name_plural = _('Questions')
 
     def get_answer_for_user(self, user):
         return Answer.objects.filter(question=self, user=user).first()
@@ -102,10 +109,12 @@ class Question(TimestampedModel):
 class QuestionChoice(TimestampedModel):
 
     question = models.ForeignKey('questions.Question', on_delete=models.CASCADE, editable=False, related_name='choices', null=True)
-    text = models.CharField(max_length=255)
+    text = models.CharField(_('Question choice text'), max_length=255)
 
     def __str__(self):
         return f'{self.question}: {self.text}'
 
     class Meta:
         order_with_respect_to = 'question'
+        verbose_name = _('Question choice')
+        verbose_name_plural = _('Question choices')

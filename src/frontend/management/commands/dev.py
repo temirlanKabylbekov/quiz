@@ -4,7 +4,7 @@ from django.core.management.base import BaseCommand
 
 
 class Command(BaseCommand):
-    help = "Run frontend development server"
+    help = "Run frontend and backend development servers"
 
     def npm(self, *args, run_async=False):
         flag = os.P_NOWAIT if run_async else os.P_WAIT
