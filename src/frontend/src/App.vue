@@ -7,6 +7,12 @@
 <script>
 export default {
   name: 'App',
+  beforeMount() {
+    this.$store.dispatch('auth/GET_WHOAMI')
+      .catch(() => {
+        window.location.replace('/accounts/login/?next=/');
+      });
+  },
 };
 </script>
 

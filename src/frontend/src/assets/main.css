@@ -1,0 +1,58 @@
+.g-link {
+    text-decoration: none;
+	cursor: pointer;
+    color: black;
+}
+
+.g-link:hover, .g-link:active, .g-link:visited, .g-link:link {
+    text-decoration: none;
+    color: black;
+}
+
+progress.g-progress {
+    position: relative;
+}
+
+progress.g-progress--show-value {
+    position: relative;
+}
+  
+progress.g-progress--show-value:after {
+    content: attr(value)'%';
+    position: absolute;
+    top: 0;
+    left: 96%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    line-height: 1.7rem;
+}
+
+progress.g-progress--selectness:after {
+    content: '\2713';
+    position: absolute;
+    top: 0;
+    left: 95%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    line-height: 1.7rem;
+}
+
+progress.g-progress--show-value.g-progress--selectness:after {
+    content: '\2713'attr(value)'%';
+    position: absolute;
+    top: 0;
+    left: 95%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    line-height: 1.7rem;
+}
+
+progress.g-progress:before {
+    content: attr(text);
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1rem;
+    line-height: 1.7rem;
+}

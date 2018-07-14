@@ -83,6 +83,9 @@ class Question(TimestampedModel):
     class Meta:
         order_with_respect_to = 'question_list'
 
+    def get_answer_for_user(self, user):
+        return Answer.objects.filter(question=self, user=user).first()
+
     def get_choices_percentage(self):
         answers = Answer.objects.filter(question=self).values('choice').annotate(Count('user'))
         num_question_answers = sum([answer['user__count'] for answer in answers])

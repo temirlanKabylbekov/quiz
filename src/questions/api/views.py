@@ -24,7 +24,8 @@ class QuestionListViewset(MultiSerializerMixin, viewsets.ModelViewSet):
     @detail_route(methods=['get'], permission_classes=[IsAuthenticated])
     def answer_stats(self, request, pk=None):
         instance = self.get_object()
-        return Response(serializers.QuestionAnswerStats(instance.get_questions(), many=True).data)
+        return Response(serializers.QuestionAnswerStats(
+            instance.get_questions(), many=True, context={'request': request}).data)
 
     @detail_route(methods=['post'], permission_classes=[IsAuthenticated])
     def set_answers(self, request, pk=None):

@@ -64,14 +64,20 @@ class QuestionSerializer(serializers.ModelSerializer):
 class QuestionAnswerStats(serializers.ModelSerializer):
 
     question_id = serializers.IntegerField(source='id')
+    choice_id = serializers.SerializerMethodField(read_only=True)
     stats = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Question
         fields = [
             'question_id',
+            'choice_id',
             'stats',
         ]
+
+    def get_choice_id(self, obj):
+        answer = obj.get_answer_for_user(self.context['request'].user)
+        return answer.choice.id if answer is not None else None
 
     def get_stats(self, obj):
         return list(obj.get_choices_percentage())
