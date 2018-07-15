@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-15 00:13+0300\n"
+"POT-Creation-Date: 2018-07-15 13:05+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,38 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: questions/admin.py:21
+msgid "Check format of passed data"
+msgstr "Проверьте формат переданных данных"
+
+#: questions/admin.py:26
+msgid "Passed invalid choice id"
+msgstr "Передан некорректный id"
+
+#: questions/admin.py:55
+msgid "Choice order in question"
+msgstr "Порядок вариантов ответа"
+
+#: questions/admin.py:56
+msgid "List the choice ids separated by a comma without a space"
+msgstr "Перечислите id вариантов ответа через запятую без пробелов"
+
+#: questions/admin.py:70
+msgid "Question order in question list"
+msgstr "Порядок вопросов"
+
+#: questions/admin.py:71
+msgid "List the question ids separated by a comma without a space"
+msgstr "Перечислите id вопросов через запятую без пробелов"
+
+#: questions/admin.py:91
+msgid "Question choice id"
+msgstr "Id варианта ответа"
+
+#: questions/admin.py:107
+msgid "Question id"
+msgstr "Id вопроса"
 
 #: questions/models.py:33
 msgid "Question list name"
@@ -58,4 +90,4 @@ msgstr "Вариант ответа"
 
 #: questions/models.py:120
 msgid "Question choices"
-msgstr "Варианты ответа"
+msgstr "Варианты ответов"
