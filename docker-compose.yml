@@ -1,0 +1,26 @@
+version: "2"
+services:
+  django:
+    build: src
+    container_name: quiz_django
+    command: bash -c "python /srv/manage.py migrate && uwsgi --ini /srv/.etc/uwsgi.ini --uwsgi-socket 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    links:
+      - postgres
+    environment:
+      DATABASE_URL: "postgres://postgres:quiz@postgres/postgres"
+
+  frontend:
+    build: src/frontend
+    command: npm run dev
+    ports:
+      - "8080:8080"
+    environment:
+      BACKEND: "http://django:8000"
+
+
+  postgres:
+    build: ./.postgres
+    environment:
+      POSTGRES_PASSWORD: quiz
